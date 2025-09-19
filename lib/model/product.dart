@@ -14,9 +14,6 @@
 
 enum Category {
   all,
-  accessories,
-  clothing,
-  home,
   pc,
   console,
   nintendo,

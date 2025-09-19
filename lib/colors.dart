@@ -13,3 +13,8 @@ const kShrineSurfaceWhite = Color(0xFFFFFBFA);
 const kShrineBackgroundWhite = Colors.white;
 
 const kShrinePurple = Color(0xFF5D1049);
+
+const cyan = Color(0xFF00BCD4);
+const purple = Color(0xFF9C27B0);
+const crimson = Color(0xFFDC143C);
+const gray = Color(0xFF9E9E9E);

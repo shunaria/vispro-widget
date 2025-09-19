@@ -20,9 +20,23 @@ import 'model/products_repository.dart';
 import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  //Make a collection of cards (102)
+    final Category category;
 
-  // TODO: Make a collection of cards (102)
+  const HomePage({this.category = Category.all, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 230, 39, 39),
+    
+    // TODO: Pass Category variable to AsymmetricView (104)
+    child: AsymmetricView(
+      products: ProductsRepository.loadProducts(category),
+    ),
+    );
+  }
+}
 
 // Replace this entire method
 List<Card> _buildGridCards(BuildContext context) {
@@ -97,54 +111,4 @@ final ThemeData theme = Theme.of(context);
       ),
     );
   }).toList();
-}
-  // TODO: Add a variable for Category (104)
-  @override
-  Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    
-    // TODO: Pass Category variable to AsymmetricView (104)
-    return Scaffold(
-      // Add app bar (102)
-      appBar: AppBar(
-        title: const Text('GACER'),
-        // Add trailing buttons (102)
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              print('Search button');
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
-            ),
-            onPressed: () {
-              print('Filter button');
-            },
-          ),
-        ],
-                    leading: IconButton(
-      icon: const Icon(
-        Icons.menu,
-        semanticLabel: 'menu',
-      ),
-      onPressed: () {
-        print('Menu button');
-      },
-    ),
-      ),
-      // Add a grid view (102)  
-body: AsymmetricView(
-  products: ProductsRepository.loadProducts(Category.all),
-),
-      // Set resizeToAvoidBottomInset (101)
-      resizeToAvoidBottomInset: false,
-    );
-  }
 }
