@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 
 import 'model/product.dart';
 import 'model/products_repository.dart';
+import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,6 +42,7 @@ final ThemeData theme = Theme.of(context);
     return Card(
       clipBehavior: Clip.antiAlias,
       // TODO: Adjust card heights (103)
+      elevation: 0.0,
       child: Column(
         // TODO: Center items on the card (103)
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,10 +61,24 @@ final ThemeData theme = Theme.of(context);
               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
               child: Column(
                // TODO: Align labels to the bottom and center (103)
-               crossAxisAlignment: CrossAxisAlignment.start,
+                 mainAxisAlignment: MainAxisAlignment.end,
+                 crossAxisAlignment: CrossAxisAlignment.center,   
                 // TODO: Change innermost Column (103)
                 children: <Widget>[
                  // TODO: Handle overflowing labels (103)
+                 Text(
+                  product.name,
+                  style: theme.textTheme.labelLarge,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  formatter.format(product.price),
+                  style: theme.textTheme.bodySmall,
+                ),
+                // End new code
                  Text(
                     product.name,
                     style: theme.textTheme.titleLarge,
@@ -86,6 +102,7 @@ final ThemeData theme = Theme.of(context);
   @override
   Widget build(BuildContext context) {
     // TODO: Return an AsymmetricView (104)
+    
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
       // Add app bar (102)
@@ -123,13 +140,9 @@ final ThemeData theme = Theme.of(context);
     ),
       ),
       // Add a grid view (102)  
-      body: GridView.count(
-      crossAxisCount: 2,
-      padding: const EdgeInsets.all(16.0),
-      childAspectRatio: 8.0 / 9.0,
-      children: _buildGridCards(context),
-      // Build a grid of cards (102)
-    ),
+body: AsymmetricView(
+  products: ProductsRepository.loadProducts(Category.all),
+),
       // Set resizeToAvoidBottomInset (101)
       resizeToAvoidBottomInset: false,
     );
